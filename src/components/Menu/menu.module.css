@@ -1,0 +1,88 @@
+.navbar {
+    background-color: aqua;
+    height: 66px;
+    display: flex;
+    align-items: center;
+}
+.logoWrapper {
+    margin-left: 15px;
+    width: 130px;
+    height: 66px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-decoration: none;
+    outline: none;
+}
+
+.logoWrapper img {
+    height: 50px;
+}
+
+.logoWrapper p {
+    font-size: 19px;
+    font-weight: 600;
+    color: #fff;
+    font-weight: 600;
+}
+
+.logoWrapper p:hover {
+    color: #eeeeee;
+}
+
+.navigation {
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    height: 100%;
+    margin-left: 30px;
+}
+
+.links {
+    padding: 0;
+    height: 100%;
+    display: flex;
+    gap: 30px;
+}
+
+.links li {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.links a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 19px;
+}
+
+.links img {
+    width: 25px;
+    height: 25px;
+    user-select: none;
+    filter: invert(1);
+    cursor: pointer;
+}
+
+.navigation button {
+    width: 190px;
+    height: 38px;
+    margin-right: 20px;
+    margin-left: 30px;
+    border-radius: 3px;
+    background-color: #05a081;
+    color: #fff;
+    font-size: 1.1rem;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.navigation button:hover {
+    background-color: #097e66;
+}
+
+.links a:hover {
+    color: #eeeeee;
+}
