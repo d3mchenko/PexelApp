@@ -2,12 +2,19 @@ import React  from 'react';
 import styles from './search.module.css';
 import searchIcon from '../../images/magnifier-search.svg';
 
+interface SearchProps {
+  text?: string;
+  width?:number;
+  activeSearchBar?:boolean;
+}
 
-
-function Search() {
+function Search(props: SearchProps) {
   return (
-    <div className={`${styles.inputSearch}`}>
-         <input type="text" placeholder="Поиск бесплатных изображений" className = {styles.input}></input>
+    <div className={`${styles.inputSearch} ${props.activeSearchBar? '': styles.hideSearchBar}`} 
+    style={{
+      width: props.width ? `${props.width}px` : '',
+    }}>
+         <input type="text" placeholder = {props.text} className = {styles.input}></input>
          <img src={searchIcon} alt='Magnifier search'></img>
     </div>
   );

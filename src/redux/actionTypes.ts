@@ -1,0 +1,1 @@
+export const LOAD_IMAGE_HEADER = 'LOAD_IMAGE_HEADER';

@@ -3,10 +3,9 @@ import styles from './main.module.css';
 import iconDropdown from '../../images/dropdown.svg';
 
 
-interface PropTypes {
-}
 
-function Main(props: PropTypes) {
+
+function Main() {
     return (
         <div className = {styles.mainContainer}>
             <div className = {styles.titleContainer}>

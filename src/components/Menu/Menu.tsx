@@ -4,18 +4,16 @@ import icon from '../../images/ellipsis.svg';
 import styles from './menu.module.css';
 import Search from '../Search/Search';
 
-interface PropTypes {
-    
-  }
 
-function Menu(props: PropTypes) {
+
+function Menu() {
     return (
         <div className={styles.navbar}>
             <a className={styles.logoWrapper} href={'/'}>
                 <img src={logo} alt="logo" />
                 <p>Pexels</p>
             </a>
-            <Search />
+            <Search text={`Поиск бесплатных изображений`} />
             <div className={styles.navigation}>
                 <ul className={styles.links}>
                     <li>

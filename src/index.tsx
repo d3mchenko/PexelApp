@@ -3,10 +3,29 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { rootReducer } from './redux/rootReducer';
+import { applyMiddleware, compose, createStore } from 'redux';
+import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
+
+// @ts-ignore
+const devtoolsExtension = window.__REDUX_DEVTOOLS_EXTENSION__
+// @ts-ignore
+  ? window.__REDUX_DEVTOOLS_EXTENSION__()
+  : undefined;
+
+const composeArray: Function[] = [applyMiddleware(thunk), devtoolsExtension as Function].filter(
+  Boolean
+);
+
+const store = createStore(rootReducer, compose(...composeArray));
+
 
 ReactDOM.render(
   <React.StrictMode>
+    <Provider store = {store}>
     <App />
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
