@@ -1,9 +1,12 @@
 import React from "react";
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
 import Header from './components/Header/Header';
 import NavBar from './components/NavBar/NavBar';
 import Main from './components/Main/Main';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import SearchPage from "./components/SearchPage/SearchPage";
+import Images from "./components/Main/Images/Images";
+
 
 
 
@@ -11,7 +14,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 function App() {
   return (
-     <BrowserRouter>
+    <BrowserRouter>
       <Switch>
         <Route exact path={'/'}>
           <>
@@ -22,7 +25,8 @@ function App() {
         </Route>
         <Route path={'/search'}>
           <>
-            <Header />
+            <SearchPage />
+            <Images />
           </>
         </Route>
       </Switch>

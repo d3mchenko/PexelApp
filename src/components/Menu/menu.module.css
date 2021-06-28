@@ -85,3 +85,9 @@
 .links a:hover {
     color: #eeeeee;
 }
+
+.activeMenu {
+    background-color: #232a34;
+    position: sticky;
+    top: 0;
+}

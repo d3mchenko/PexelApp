@@ -18,6 +18,7 @@ header {
     display: flex;
     justify-content: center;
 }
+
 .content {
     padding-top: 115px;
     width: 652px;
@@ -52,7 +53,6 @@ header {
     display: flex;
     align-items: center;
     gap: 5px;
-    
 }
 
 .linkWrapper a {
