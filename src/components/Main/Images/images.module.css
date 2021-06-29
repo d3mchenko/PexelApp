@@ -8,3 +8,9 @@
     position: relative;
     grid-row-gap: 20px;
 }
+
+.emptyResult {
+    text-align: center;
+    font-size: 26px;
+    font-weight: 800;
+}

@@ -1,4 +1,4 @@
-import { LOAD_IMAGES_MAIN, LOAD_IMAGE_SEARCH } from './actionTypes';
+import { LOAD_IMAGES_MAIN, LOAD_IMAGE_SEARCH, LOAD_IMAGE_SEARCH_PAGINATION } from './actionTypes';
 
 export interface ImageInfoType {
     landscape?: string;
@@ -36,6 +36,7 @@ const initialState: InitialImagesStateTypes = {
 
 
 export function imagesReducer(state: InitialImagesStateTypes = initialState, action: { type: string; payload?: any }) {
+    debugger;
     switch (action.type) {
         case LOAD_IMAGES_MAIN:
             return {
@@ -48,6 +49,13 @@ export function imagesReducer(state: InitialImagesStateTypes = initialState, act
                 ...state,
                 photos: [],
             };
+        case LOAD_IMAGE_SEARCH_PAGINATION:
+            debugger;
+            return {
+                ...state,
+                photos: state.photos.concat(action.payload.photos),
+                currentPage: state.currentPage + 1,
+            }
         default:
             return state;
     }

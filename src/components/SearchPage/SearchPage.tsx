@@ -4,7 +4,7 @@ import Menu from '../Menu/Menu'
 import { ReactComponent as PhotoIcon } from '../../images/photos.svg';
 
 interface SearchPageProps {
-    inputSearchText?: string;
+    inputValue?: string;
 }
 
 function SearchPage(props: SearchPageProps) {
@@ -22,7 +22,7 @@ function SearchPage(props: SearchPageProps) {
                     </div>
                     <div className={styles.rightTabs}></div>
                 </div>
-                <h1>Фото На Тему "{props.inputSearchText ? props.inputSearchText : ''}"</h1>
+                <h1>Фото На Тему "{props.inputValue ? props.inputValue : ''}"</h1>
             </div>
         </div>
     );

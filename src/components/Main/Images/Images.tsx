@@ -3,10 +3,11 @@ import { connect } from 'react-redux';
 import Image from './Image/Image';
 import styles from './images.module.css';
 import { RootState } from '../../../redux/rootReducer';
-import { getImagesMain, searchImages } from '../../../redux/actions';
+import { getImagesMain, searchImages, searchImagesPagination } from '../../../redux/actions';
 import { ImageObjectTypes } from '../../../redux/imagesReducer';
 import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
+
 
 
 
@@ -15,20 +16,31 @@ interface ImagesProps {
     getImagesMain: Function;
     currentPage: number;
     searchImages: Function;
+    searchImagesPagination: Function;
 }
 
 function Images(props: ImagesProps) {
     const location = useLocation();
-    const [fetching, setFetching] = useState(true);
+    const [fetching, setFetching] = useState(false);
     useEffect(() => {
+        console.log(location.pathname);
+        if (location.pathname === '/') {
+            props.getImagesMain(props.currentPage);
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
+
+
+    /*useEffect(() => {
         if (fetching) {
             if (location.pathname === '/') {
                 props.getImagesMain(props.currentPage);
                 setFetching(false);
             }
             else {
-                let test = location.pathname;
-                props.searchImages(test);
+                let locationPath = location.pathname;
+                props.searchImagesPagination(locationPath, props.currentPage);
                 setFetching(false);
             }
         }
@@ -43,10 +55,15 @@ function Images(props: ImagesProps) {
         }
     }, []);
 
+
     const scrollHandler = (e: any) => {
         if (e.target.documentElement.scrollHeight - (e.target.documentElement.scrollTop + window.innerHeight) < 100) {
             setFetching(true);
         }
+    }*/
+
+    if (props.photos.length === 0) {
+        return (<h2 className={styles.emptyResult}>Нету результата по данному запросу</h2>)
     }
 
 
@@ -69,6 +86,7 @@ function mapStateToProps(state: RootState) {
 const mapDispatchToProps = {
     getImagesMain,
     searchImages,
+    searchImagesPagination,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Images);

@@ -18,25 +18,33 @@ interface SearchProps {
 
 function Search(props: SearchProps) {
   const history = useHistory();
+
+  const eventInputChangeValue = (e: ChangeEvent<HTMLInputElement>) => {
+    props.handleInputChangeValue(e.target.value);
+  }
+
+  const eventKeyboardSearch = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.code === 'Enter' && props.inputValue.length > 0 && props.inputValue !== ' ') {
+      history.push(`/search/${props.inputValue}`);
+      props.searchImages(props.inputValue);
+    }
+  }
+
+  const eventIconSearch = () => {
+    if (props.inputValue.length > 0 && props.inputValue !== ' ') {
+      history.push(`/search/${props.inputValue}`);
+      props.searchImages(props.inputValue);
+    }
+  }
+
   return (
     <div className={`${styles.inputSearch} ${props.activeSearchBar ? '' : styles.hideSearchBar}`}
       style={{
         width: props.width ? `${props.width}px` : '',
       }}>
-      <input type="text" placeholder={props.text} className={styles.input} onChange={
-        (e: ChangeEvent<HTMLInputElement>) => {
-          props.handleInputChangeValue(e.target.value);
-        }} onKeyPress={(e: KeyboardEvent<HTMLInputElement>) => {
-          if (e.code === 'Enter' && props.inputValue.length > 0 && props.inputValue !== ' ') {
-            history.push(`/search/${props.inputValue}`);
-            props.searchImages(props.inputValue);
-          }
-        }}></input>
-      <img src={searchIcon} alt='Magnifier search' onClick={() => {
-        if (props.inputValue.length > 0 && props.inputValue !== ' ')
-          history.push(`/search/${props.inputValue}`);
-        props.searchImages(props.inputValue);
-      }}></img>
+      <input type="text" placeholder={props.text} className={styles.input} onChange={eventInputChangeValue}
+        onKeyPress={eventKeyboardSearch}></input>
+      <img src={searchIcon} alt='Magnifier search' onClick={eventIconSearch}></img>
     </div>
   );
 }
