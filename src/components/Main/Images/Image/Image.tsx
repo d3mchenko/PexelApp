@@ -3,6 +3,8 @@ import styles from './image.module.css';
 
 interface ImageProps {
     src: string;
+    photographURL: string;
+    photograph: string;
 }
 
 function Image(props: ImageProps) {
