@@ -1,4 +1,4 @@
-import { LOAD_IMAGE_HEADER, LOAD_IMAGES_MAIN, INPUT_CHANGE, LOAD_IMAGE_SEARCH, LOAD_IMAGE_SEARCH_PAGINATION, SET_FETCHING, FILTER_ORIENTATION } from './actionTypes';
+import { LOAD_IMAGE_HEADER, LOAD_IMAGES_MAIN, INPUT_CHANGE, LOAD_IMAGE_SEARCH, LOAD_IMAGE_SEARCH_PAGINATION, SET_FETCHING, FILTER_ORIENTATION, PUT_LIKE, DELETE_LIKE } from './actionTypes';
 import axios from './app.config';
 //const { default: axios } = require('axios');
 
@@ -64,5 +64,17 @@ export function setFetching(value: boolean) {
 export function checkOrientationFilter(value: string) {
   return (dispatch: Function) => {
     dispatch({ type: FILTER_ORIENTATION, payload: value })
+  }
+}
+
+export function putLike(value: number) {
+  return (dispatch: Function) => {
+    dispatch({ type: PUT_LIKE, payload: value });
+  }
+}
+
+export function deleteLike(value: number) {
+  return (dispatch: Function) => {
+    dispatch({ type: DELETE_LIKE, payload: value });
   }
 }

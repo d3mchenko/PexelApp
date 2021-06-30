@@ -1,4 +1,4 @@
-import { LOAD_IMAGES_MAIN, LOAD_IMAGE_SEARCH, LOAD_IMAGE_SEARCH_PAGINATION, SET_FETCHING } from './actionTypes';
+import { LOAD_IMAGES_MAIN, LOAD_IMAGE_SEARCH, LOAD_IMAGE_SEARCH_PAGINATION, SET_FETCHING, PUT_LIKE, DELETE_LIKE } from './actionTypes';
 
 export interface ImageInfoType {
     landscape?: string;
@@ -28,12 +28,14 @@ interface InitialImagesStateTypes {
     photos: ImageObjectTypes[];
     currentPage: number;
     fetching: boolean;
+    likes: Array<number>;
 }
 
 const initialState: InitialImagesStateTypes = {
     photos: [],
     currentPage: 1,
     fetching: true,
+    likes: [],
 };
 
 
@@ -60,6 +62,17 @@ export function imagesReducer(state: InitialImagesStateTypes = initialState, act
             return {
                 ...state,
                 fetching: action.payload,
+            }
+        case PUT_LIKE:
+            return {
+                ...state,
+                likes: state.likes.concat(action.payload),
+            }
+        case DELETE_LIKE:
+            state.likes.splice(state.likes.indexOf(action.payload), 1);
+            return {
+                ...state,
+                likes: [...state.likes],
             }
         default:
             return state;

@@ -22,6 +22,7 @@ interface ImagesProps {
 }
 
 function Images(props: ImagesProps) {
+    console.log(props.photos);
     const location = useLocation();
 
     const checkPathname = () => {
