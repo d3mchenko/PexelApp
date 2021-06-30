@@ -2,10 +2,57 @@
     width: 100%;
     position: relative;
     cursor: pointer;
+    display: flex;
 }
 
 .image {
     width: 100%;
     object-fit: cover;
     display: block;
+}
+
+.imageContainer:hover .infoImages {
+    visibility: visible;
+    opacity: 1;
+}
+
+.infoImages {
+    height: 80px;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    align-content: center;
+    visibility: hidden;
+    align-items: center;
+    opacity: 0;
+    transition: 0.2s ease-out;
+    padding-left: 10px;
+    justify-content: space-around;
+}
+
+.photographLink a {
+    text-decoration: none;
+    color: #e8e8e8;
+}
+
+.photographLink a:hover {
+    color: #fff;
+}
+
+.svgButtons {
+    width: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.iconSVG {
+    fill: #e8e8e8;
+    width: 20px;
+    height: 20px;
+}
+
+.iconSVG:hover {
+    fill: #fff;
 }

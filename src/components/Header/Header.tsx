@@ -5,18 +5,25 @@ import styles from './header.module.css';
 import { listCategory } from '../../category';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { getBackgroundImageHeader } from '../../redux/actions';
+import { getBackgroundImageHeader, searchImages } from '../../redux/actions';
 import { RootState } from '../../redux/rootReducer';
+import { useInView } from 'react-intersection-observer';
 
 interface HeaderProps {
   headerImage: string;
   photograph?: string;
   photographLink?: string;
   getBackgroundImageHeader: Function;
+  searchImages: Function;
+  currentPage: number;
 }
 
 
 function Header(props: HeaderProps) {
+  const options = {
+    threshold: 0.8,
+  };
+  const { ref, inView } = useInView(options);
   const categories: Array<string> = listCategory.sort(
     () => 0.5 - Math.random()
   );
@@ -26,11 +33,12 @@ function Header(props: HeaderProps) {
   }, []);
   return (
     <header>
-      <Menu />
+      <Menu activeSearchBar={inView ? false : true} />
       <img
         src={props.headerImage}
         className={styles.headerImage}
         alt="background"
+        ref={ref}
       />
       <div className={styles.contentWrapper}>
         <div className={styles.content}>
@@ -43,7 +51,9 @@ function Header(props: HeaderProps) {
             <div className={styles.linkWrapper}>
               {categories.slice(0, 6).map((category: string) => {
                 return (
-                  <Link to={`/search/${category}`} key={category}>
+                  <Link to={`/search/${category}`} key={category} onClick={() => {
+                    props.searchImages(category, props.currentPage); // проверить
+                  }}>
                     {category}
                   </Link>
                 )
@@ -63,11 +73,13 @@ function mapStateToProps(state: RootState) {
     headerImage: state.headerReducer.headerImage,
     photograph: state.headerReducer.photograph,
     photographLink: state.headerReducer.photographLink,
+    currentPage: state.imagesReducer.currentPage,
   };
 }
 
 const mapDispatchToProps = {
   getBackgroundImageHeader,
+  searchImages,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

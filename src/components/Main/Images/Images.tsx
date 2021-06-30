@@ -10,6 +10,7 @@ import { useLocation } from 'react-router-dom';
 
 
 
+
 interface ImagesProps {
     photos: ImageObjectTypes[];
     getImagesMain: Function;
@@ -23,14 +24,22 @@ interface ImagesProps {
 function Images(props: ImagesProps) {
     const location = useLocation();
 
+    const checkPathname = () => {
+        const pathnamePage = location.pathname.split('/').filter((elemQuery) => {
+            return elemQuery !== 'search';
+        }).join('');
+        return pathnamePage;
+    }
+
+    let searchQuery = checkPathname();
+
     useEffect(() => {
         if (props.fetching) {
             if (location.pathname === '/') {
                 props.getImagesMain(props.currentPage);
             }
             else {
-                let locationPath = location.pathname;
-                props.searchImagesPagination(locationPath, props.currentPage);
+                props.searchImagesPagination(searchQuery, props.currentPage);
             }
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -58,10 +67,13 @@ function Images(props: ImagesProps) {
 
 
     return (
-        <div className={styles.imagesContainer}>
-            {props.photos.map((photo) => (
-                <Image src={`${photo.src.original}?auto=compress&cs=tinysrgb&dpr=1&w=400`} photographURL={photo.photographer_url} photograph={photo.photographer} />
-            ))}
+        <div>
+            <h1 className={styles.textSearch}>{`${location.pathname !== '/' ? `Фото На Тему "${checkPathname()}"` : ''}`}</h1>
+            <div className={styles.imagesContainer}>
+                {props.photos.map((photo) => (
+                    <Image src={`${photo.src.original}?auto=compress&cs=tinysrgb&dpr=1&w=400`} photographURL={photo.photographer_url} photograph={photo.photographer} photoId={photo.id} />
+                ))}
+            </div>
         </div>
     )
 }

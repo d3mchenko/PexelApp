@@ -1,4 +1,4 @@
-import { LOAD_IMAGE_HEADER, LOAD_IMAGES_MAIN, INPUT_CHANGE, LOAD_IMAGE_SEARCH, LOAD_IMAGE_SEARCH_PAGINATION, SET_FETCHING } from './actionTypes';
+import { LOAD_IMAGE_HEADER, LOAD_IMAGES_MAIN, INPUT_CHANGE, LOAD_IMAGE_SEARCH, LOAD_IMAGE_SEARCH_PAGINATION, SET_FETCHING, FILTER_ORIENTATION } from './actionTypes';
 import axios from './app.config';
 //const { default: axios } = require('axios');
 
@@ -47,9 +47,10 @@ export function searchImagesPagination(searchValue: string, page: number) {
   return (dispatch: Function) => {
     axios.get(`/search?query=${searchValue}&per_page=20&page=${page}`, {
     }).then((response: any) => {
-      dispatch(setFetching(false));
       const result = response.data;
       dispatch({ type: LOAD_IMAGE_SEARCH_PAGINATION, payload: result })
+    }).finally(() => {
+      dispatch(setFetching(false));
     })
   }
 }
@@ -57,5 +58,11 @@ export function searchImagesPagination(searchValue: string, page: number) {
 export function setFetching(value: boolean) {
   return (dispatch: Function) => {
     dispatch({ type: SET_FETCHING, payload: value });
+  }
+}
+
+export function checkOrientationFilter(value: string) {
+  return (dispatch: Function) => {
+    dispatch({ type: FILTER_ORIENTATION, payload: value })
   }
 }
